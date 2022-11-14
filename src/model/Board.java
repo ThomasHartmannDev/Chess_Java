@@ -9,8 +9,19 @@ public class Board {
 
     public static final int TimeToPlay = 10000; // Timer the player have to play your turn!
 
-    public Board(int line, int column){
-        this.pieces = new Piece[line][column]; // Creating the Array from board.
+    public Board(){
+        this.pieces = new Piece[8][8]; // Creating the Array from board.
+        Rook whiteRook1 = new Rook(EnumColor.WHITE, 0,0);
+        Rook whiteRook2 = new Rook(EnumColor.WHITE, 0,7);
+
+        Rook blackRook1 = new Rook(EnumColor.BLACK, 7,7);
+        Rook blackRook2 = new Rook(EnumColor.BLACK, 7,0);
+
+        this.addPiece(whiteRook1);
+        this.addPiece(whiteRook2);
+        this.addPiece(blackRook1);
+        this.addPiece(blackRook2);
+
     }
     public Piece getPiece(int line, int column){ // Getting from the coordinates, which piece are there.
         return this.pieces[line][column];

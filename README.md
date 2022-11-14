@@ -16,7 +16,7 @@ At the first, sorry if I do some English miss takes
 - [x]  Models
    - [x] Pieces
    - [x] Board
-   - [ ] GUI
+   - [x] GUI
 - [ ] Visual 
    - [ ] Window
    - [ ] Board

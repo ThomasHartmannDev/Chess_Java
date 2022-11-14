@@ -9,6 +9,8 @@ public class JPiece extends JLabel {
 
     public JPiece(Piece piece){
         this.piece = piece;
+        //this.setText("PIECE");
+        this.setIcon(new ImageIcon(piece.getImage()));
     }
 
     public Piece getPiece(){

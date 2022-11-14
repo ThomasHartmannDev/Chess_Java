@@ -1,6 +1,7 @@
 package vision;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JCell extends JPanel {
     private JPiece jPiece;
@@ -10,5 +11,16 @@ public class JCell extends JPanel {
     public JCell(int line, int column){
         this.line = line;
         this.column = column;
+    }
+    public JCell(JPiece jPiece){
+        this.jPiece = jPiece;
+        // Info. from where is the Cell.
+        this.line = jPiece.getPiece().getLine();
+        this.column = jPiece.getPiece().getColumn();
+        this.add(jPiece);
+        if((jPiece.getPiece() != null)&& (jPiece.getPiece().isSelected())){
+            // Creating the Line Boarder when the piece is selected.
+         this.setBorder(BorderFactory.createLineBorder(Color.RED,5));
+        }
     }
 }
