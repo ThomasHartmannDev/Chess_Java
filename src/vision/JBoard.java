@@ -46,7 +46,6 @@ public class JBoard extends JPanel implements MouseListener {
         //Using (JCell) to pass the object in to JCell.
         this.board.playTurn(jCell.getLine(),jCell.getColumn());
         this.drawBoard();
-        System.out.println("Clicck");
     }
 
     @Override

@@ -73,7 +73,6 @@ public abstract class Piece { // Creating a new abstract class Piece to create a
     }
 
     public boolean isSelected() {
-        System.out.println(selected);
         return selected;
     }
 

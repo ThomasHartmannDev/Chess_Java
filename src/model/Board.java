@@ -1,5 +1,9 @@
 package model;
 
+import vision.JChess;
+
+import javax.swing.*;
+
 public class Board {
 
     private Piece[][] pieces;
@@ -20,7 +24,6 @@ public class Board {
         Bishop whiteBishop2 = new Bishop(EnumColor.WHITE, 0,5);
         Knight whiteKnight2 = new Knight(EnumColor.WHITE, 0,6);
         Rook whiteRook2 = new Rook(EnumColor.WHITE, 0,7);
-
 
         Rook blackRook1 = new Rook(EnumColor.BLACK, 7,0);
         Knight blackKnight1 = new Knight(EnumColor.BLACK, 7, 1);
@@ -50,10 +53,24 @@ public class Board {
         this.addPiece(blackKnight2);
         this.addPiece(blackRook2);
 
+        //Add Pawn Black and White.
+        for(int i = 0; i < 8; i++){
+            Pawn pawnWhite =  new Pawn(EnumColor.WHITE, 1, i);
+            this.addPiece(pawnWhite);
+
+            Pawn pawnBlack =  new Pawn(EnumColor.BLACK, 6, i);
+            this.addPiece(pawnBlack);
+        }
+
     }
     public Piece getPiece(int line, int column){ // Getting from the coordinates, which piece are there.
         return this.pieces[line][column];
     }
+    public void setPiece(Piece piece){
+        this.pieces[piece.getLine()][piece.getColumn()] = piece;
+        piece.setBoard(this);
+    }
+
     public void addPiece(Piece piece){
         this.pieces[piece.getLine()][piece.getColumn()] = piece;
         /*
@@ -76,7 +93,14 @@ public class Board {
     }
 
     public void movePiece(Piece piece, int newLine, int newColumn){
-
+        if(piece.MoveValidator(newLine, newColumn)){
+            this.pieces[piece.getLine()][piece.getColumn()] = null;
+            piece.setLine(newLine);
+            piece.setColumn(newColumn);
+            this.setPiece(piece);
+            this.selectPiece(piece);
+            this.changeTurn();
+        }
     }
 
     public void changeTurn(){ // Just changing the color turn.
@@ -85,6 +109,7 @@ public class Board {
         } else {
             this.turn = EnumColor.WHITE;
         }
+        JChess.setTurn(this.turn);
         /*
         * We don't use == because it will use the place on the memory, and it will be never equal,
         * so we need to make sure the value are equals.
@@ -104,6 +129,11 @@ public class Board {
             if(this.selectedPiece == piece){
                 this.selectPiece(piece);
                 System.out.println("unselected");
+            } else {
+                if(piece == null || !piece.getColor().equals(this.selectedPiece.getColor())){
+                    // If the piece is null (cell without a piece) and the piece is not the same color
+                    this.movePiece(this.selectedPiece, line, column);
+                }
             }
         }
 
