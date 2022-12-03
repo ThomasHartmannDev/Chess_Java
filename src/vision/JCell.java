@@ -18,9 +18,22 @@ public class JCell extends JPanel {
         this.line = jPiece.getPiece().getLine();
         this.column = jPiece.getPiece().getColumn();
         this.add(jPiece);
-        if((jPiece.getPiece() != null)&& (jPiece.getPiece().isSelected())){
+        if(jPiece.getPiece()!= null){
+            System.out.println("Piece not null");
+            System.out.println(jPiece.getPiece().isSelected() + "Piece selected.");
+            if(jPiece.getPiece().isSelected()){
+                System.out.println("Piece: " + (jPiece.getPiece().isSelected()));
+                this.setBorder(BorderFactory.createLineBorder(Color.RED,5));
+            }
             // Creating the Line Boarder when the piece is selected.
-         this.setBorder(BorderFactory.createLineBorder(Color.RED,5));
         }
+    }
+
+    public int getLine(){
+        return this.line;
+    }
+
+    public int getColumn(){
+        return this.column;
     }
 }

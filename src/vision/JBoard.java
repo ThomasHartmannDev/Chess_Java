@@ -4,16 +4,18 @@ import model.Piece;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class JBoard extends JPanel {
+public class JBoard extends JPanel implements MouseListener {
     private Board board; // Taking the board from the Model.
 
     public JBoard(Board board){
         this.board = board;
-        this.DrawBoard();
+        this.drawBoard();
     }
 
-    public void DrawBoard(){
+    public void drawBoard(){
         this.removeAll();// Removing everything to make sure that will create on a clean page.
         this.setLayout(new GridLayout(8,8));// Creating a 8x8 Grid
         for(int i=0; i<8; i++){
@@ -32,8 +34,38 @@ public class JBoard extends JPanel {
                     jCell.setBackground(Color.darkGray);
                 }
                 this.add(jCell);
+                jCell.addMouseListener(this); // "this" represent this class, "JBoard"
             }
         }
         this.revalidate();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) { // Event to catch click.
+        JCell jCell = (JCell) e.getSource(); // Get the clicked component.
+        //Using (JCell) to pass the object in to JCell.
+        this.board.playTurn(jCell.getLine(),jCell.getColumn());
+        this.drawBoard();
+        System.out.println("Clicck");
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

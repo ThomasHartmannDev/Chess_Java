@@ -6,6 +6,7 @@ public abstract class Piece { // Creating a new abstract class Piece to create a
     private int line, column; // Setting Line and Columns from the board.
     private String image; // Setting the image from the piece.
     private boolean eliminated = false; // Checking if the piece still on the board.
+
     private boolean selected = false; // Checking if the piece is selected
     private Board board;
     public Piece(EnumColor color, int line, int column, String image){
@@ -72,6 +73,7 @@ public abstract class Piece { // Creating a new abstract class Piece to create a
     }
 
     public boolean isSelected() {
+        System.out.println(selected);
         return selected;
     }
 
