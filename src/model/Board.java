@@ -1,8 +1,11 @@
 package model;
 
+import controller.ControlTime;
+import vision.JBoard;
 import vision.JChess;
 
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
 
@@ -11,10 +14,13 @@ public class Board {
     private Piece selectedPiece = null; // We need to check which piece are selected.
     private EnumColor turn = EnumColor.WHITE; // Setting the first turn is always from the white side!
 
-    public static final int TimeToPlay = 10000; // Timer the player have to play your turn!
+    private int timeToPlayWhite = 600000; // Timer the player have to play your turn!
+    private int timeToPlayBlack = 600000;
 
+    private List<Piece> pieceOutGame;
     public Board(){
         this.pieces = new Piece[8][8]; // Creating the Array from board.
+        this.pieceOutGame = new ArrayList<>();
         //Setting White Pieces Positions.
         Rook whiteRook1 = new Rook(EnumColor.WHITE, 0,0);
         Knight whiteKnight1 = new Knight(EnumColor.WHITE, 0,1);
@@ -82,12 +88,12 @@ public class Board {
     }
     public void selectPiece(Piece piece){
         if(piece.isSelected()){ // If the piece is selected, we make it false.
-            System.out.println("Piece: "+ piece.isSelected());
+
             piece.setSelected(false);
             this.selectedPiece = null;
         } else {
             piece.setSelected(true); // if piece was not selected, we make is true, he marks the piece
-            System.out.println("Piece: "+ piece.isSelected());
+
             this.selectedPiece = piece; // and the board.
         }
     }
@@ -130,13 +136,40 @@ public class Board {
                 this.selectPiece(piece);
                 System.out.println("unselected");
             } else {
-                if(piece == null || !piece.getColor().equals(this.selectedPiece.getColor())){
-                    // If the piece is null (cell without a piece) and the piece is not the same color
+                if(piece == null){
+                    // Moving to a Empty Cell.
+                    this.movePiece(this.selectedPiece, line, column);
+                }
+                if(piece != null && !piece.getColor().equals(this.selectedPiece.getColor())){
+                  // If piece is not null and the piece is not with the same color.
+                  // Taking enemy piece.
+                    piece.setEliminated(true);
+                    this.pieceOutGame.add(piece);
                     this.movePiece(this.selectedPiece, line, column);
                 }
             }
         }
 
 
+    }
+    public int gettimeToPlayWhite(){
+        return this.timeToPlayWhite;
+    }
+    public int gettimeToPlayBlack(){
+        return this.timeToPlayBlack;
+    }
+    public void setTimeToPlayWhite(int newTime){
+        this.timeToPlayWhite = newTime;
+    }
+    public void setTimeToPlayBlack(int newTime){
+        this.timeToPlayBlack = newTime;
+    }
+
+    public EnumColor getTurn(){
+        return this.turn;
+    }
+
+    public List<Piece> getPieceOutGame(){
+        return this.pieceOutGame;
     }
 }

@@ -16,6 +16,7 @@ public class JBoard extends JPanel implements MouseListener {
     }
 
     public void drawBoard(){
+        JChess.pnKillPiece.removeAll();
         this.removeAll();// Removing everything to make sure that will create on a clean page.
         this.setLayout(new GridLayout(8,8));// Creating a 8x8 Grid
         for(int i=0; i<8; i++){
@@ -36,6 +37,10 @@ public class JBoard extends JPanel implements MouseListener {
                 this.add(jCell);
                 jCell.addMouseListener(this); // "this" represent this class, "JBoard"
             }
+        }
+        for(Piece removedPiece : this.board.getPieceOutGame()){
+            JChess.pnKillPiece.add(new JPiece(removedPiece));
+
         }
         this.revalidate();
     }
@@ -66,5 +71,12 @@ public class JBoard extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+    public Board getBoard(){
+        return this.board;
+    }
+
+    public void setBoard(Board board){
+        this.board = board;
     }
 }
