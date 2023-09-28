@@ -54,7 +54,7 @@ public class JChess extends JFrame {
         });
 
         pnKillPiece.setLayout(new FlowLayout());
-        //this.add(pnKillPiece, BorderLayout.EAST);
+        this.add(pnKillPiece, BorderLayout.EAST);
 
         btEndGame = new JButton("End Game");
         btDraw = new JButton("Draw");
@@ -70,13 +70,11 @@ public class JChess extends JFrame {
         lbTimeBlack = new JLabel("White Time: 0");
         pnSideE.add(lbTimeWhite, BorderLayout.PAGE_START);
 
-        //pnSideE.add(pnKillPiece, BorderLayout.EAST);
+        pnSideE.add(pnKillPiece, BorderLayout.EAST);
 
         pnSideE.add(lbTimeBlack, BorderLayout.PAGE_END);
 
         this.add(pnSideE, BorderLayout.EAST);
-
-
 
 
 

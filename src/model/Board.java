@@ -98,7 +98,7 @@ public class Board {
         }
     }
 
-    public void movePiece(Piece piece, int newLine, int newColumn){
+    public boolean movePiece(Piece piece, int newLine, int newColumn){
         if(piece.MoveValidator(newLine, newColumn)){
             this.pieces[piece.getLine()][piece.getColumn()] = null;
             piece.setLine(newLine);
@@ -106,6 +106,9 @@ public class Board {
             this.setPiece(piece);
             this.selectPiece(piece);
             this.changeTurn();
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -143,9 +146,11 @@ public class Board {
                 if(piece != null && !piece.getColor().equals(this.selectedPiece.getColor())){
                   // If piece is not null and the piece is not with the same color.
                   // Taking enemy piece.
-                    piece.setEliminated(true);
-                    this.pieceOutGame.add(piece);
-                    this.movePiece(this.selectedPiece, line, column);
+                    if(this.movePiece(this.selectedPiece, line, column)){
+                        piece.setEliminated(true);
+                        //this.pieceOutGame.add(piece);
+                    }
+
                 }
             }
         }
