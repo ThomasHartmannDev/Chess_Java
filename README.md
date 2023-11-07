@@ -17,13 +17,12 @@ At the first, sorry if I do some English miss takes
    - [x] Pieces
    - [x] Board
    - [x] GUI
-- [ ] Visual 
-   - [ ] Window
-   - [ ] Board
-   - [ ] Pieces
-   - [ ] Your Turn
-   - [ ] Timer 
-   - [ ] Last Move
+- [X] Visual 
+   - [X] Window
+   - [X] Board
+   - [X] Pieces
+   - [X] Your Turn
+   - [X] Timer 
   
 
 ## Rules from chess
